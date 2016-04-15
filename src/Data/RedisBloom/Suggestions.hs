@@ -16,8 +16,9 @@ import Data.Hashable (Hashable)
 import Data.RedisBloom
 import Data.RedisBloom.Hash
 
--- | http://hur.st/bloomfilter
--- Suggests an appropriate capacity for a given number of elements.
+-- | Suggests an appropriate capacity for a given number of elements.
+--
+-- This uses the algorithm described at <http://hur.st/bloomfilter>
 suggestCapacity :: forall a b. (Integral a, RealFrac b, Floating b)
                    => a -- ^ expected maximum capacity
                    -> b -- ^ desired false positive rate where 0 < /e/ < 1
