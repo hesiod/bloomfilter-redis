@@ -5,3 +5,4 @@
 .tasty-rerun-log
 cabal.sandbox.config
 dist
+report.html
