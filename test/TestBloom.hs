@@ -107,7 +107,7 @@ treeEpsilonVar = testGroup "variable configuration"
         notlen <- pick . choose $ (4, 2 * len)
         let vec     = vectorOf len elementGen
             check l = not . flip elem l
-            vecn  l = vectorOf (2^8) . flip suchThat (check l) $ elementGen
+            vecn  l = vectorOf notlen . flip suchThat (check l) $ elementGen
         lx <- pick vec
         let lx' = nub lx
         lxnot <- pick $ vecn lx'
