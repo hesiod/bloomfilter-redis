@@ -78,7 +78,7 @@ treeFixed = testGroup "fixed configuration"
     QC.testProperty "multiple elements" $
       monadicIO $ do
         lx <- elementGenLNubbed
-        b <- run . exec $ fmap (getAll . fold . fmap All) (createAddQueryL test_bf lx)
+        b <- run . exec $ fmap (getAll . foldMap All) (createAddQueryL test_bf lx)
         assert b
   ]
 treeVar = testGroup "variable configuration"
@@ -94,7 +94,7 @@ treeVar = testGroup "variable configuration"
         len <- pick . choose $ (2^2, 2^8)
         lx <- pick $ vectorOf (min (fromIntegral $ capacity blt) len) elementGen
         let lx' = nub lx
-        b <- run . exec $ fmap (getAll . fold . fmap All) (createAddQueryL blt lx')
+        b <- run . exec $ fmap (getAll . foldMap All) (createAddQueryL blt lx')
         assert b
   ]
 treeEpsilonVar = testGroup "variable configuration"

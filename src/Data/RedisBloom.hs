@@ -72,4 +72,4 @@ query (Capacity c) q hashf x = do
 lookupMany :: (Traversable t, Monad m) => (a -> m Bool) -> t a -> m Bool
 lookupMany lookupBit hashes = do
   bools <- mapM lookupBit hashes
-  return . getAll . fold . fmap All $ bools
+  return . getAll . foldMap All $ bools
