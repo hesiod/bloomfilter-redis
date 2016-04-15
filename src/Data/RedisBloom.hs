@@ -1,4 +1,5 @@
 {-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE Trustworthy #-}
 
 -- | A bloom filter for the Redis in-memory store.
@@ -13,8 +14,12 @@ module Data.RedisBloom
      createBF, createIfNewBF, addBF, queryBF
     ) where
 
+#if !MIN_VERSION_base(4,8,0)
+import Prelude hiding (mapM)
+import Data.Traversable (Traversable(..))
+import Data.Foldable (foldMap)
+#endif
 import Data.Monoid (All(..))
-
 import Data.ByteString.Char8 (pack)
 import Database.Redis
 
