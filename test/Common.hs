@@ -1,3 +1,6 @@
+{-# LANGUAGE CPP #-}
+{-# LANGUAGE Trustworthy #-}
+
 module Common where
 
 #if !MIN_VERSION_base(4,8,0)
