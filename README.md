@@ -17,15 +17,9 @@ The hash family algorithm is partly inspired by
 
 A benchmark for the FNV hash function is included and can
 be invoked using `cabal bench` or `stack bench`.
+An HTML report is generated as `report.html`.
 
 A testing suite using `tasty` is included.
-Note that the last test, verifying that bloom filters
-created with a requested false positive rate fulfill
-their expected false positive performance,
-miserably fails for perceived 5% of the test cases.
-
-If you can find the bug behind this, please drop me
-a mail.
 
 # Further Information
 ## Todo
