@@ -62,7 +62,7 @@ getBit bf i = do
 -- | Query whether an element exists in the bloom filter.
 --
 -- Gracefully fails upon failure by returning 'False'.
-queryBF :: (Hashable a, MonadRedis m, RedisCtx m (Either Reply)) => Bloom a -> a -> m Bool
+queryBF :: (MonadRedis m, RedisCtx m (Either Reply)) => Bloom a -> a -> m Bool
 queryBF bf = query (capacity bf) (getBit bf) (hf bf)
 
 query :: Monad m => Capacity -> (Integer -> m Bool) -> HashFamily a -> a -> m Bool
