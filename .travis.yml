@@ -80,6 +80,7 @@ matrix:
   allow_failures:
   - env: BUILD=cabal GHCVER=head  CABALVER=head
   - env: BUILD=stack ARGS="--resolver nightly"
+  - env: BUILD=stack ARGS="--resolver lts-2"
 
 before_install:
 # Using compiler above sets CC to an invalid value, so unset it
