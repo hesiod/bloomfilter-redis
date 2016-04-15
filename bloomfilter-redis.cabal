@@ -38,7 +38,7 @@ library
                    , DeriveGeneric
                    , BangPatterns
                    , Safe
-  build-depends:     base       >= 4.3 && < 4.10
+  build-depends:     base       >= 4.7 && < 4.10
                    , bytestring >= 0.9 && < 0.11
                    , binary     >= 0.7 && < 0.9
                    , hashable   >= 1.2 && < 1.3
