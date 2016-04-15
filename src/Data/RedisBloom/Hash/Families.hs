@@ -1,4 +1,5 @@
 {-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE Safe #-}
 
 -- | Hash function family suitable for use in a bloom filter.
@@ -15,6 +16,9 @@ module Data.RedisBloom.Hash.Families
     )
 where
 
+#if !MIN_VERSION_base(4,8,0)
+import Control.Applicative ((<$>))
+#endif
 import Data.Bits
 import Data.Word
 import Data.Hashable
