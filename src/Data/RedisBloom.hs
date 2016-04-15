@@ -13,7 +13,6 @@ module Data.RedisBloom
 import Data.Foldable
 import Data.Monoid
 
-import Data.Hashable
 import qualified Data.ByteString.Char8 as BS
 import Database.Redis
 
