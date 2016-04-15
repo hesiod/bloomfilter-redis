@@ -1,5 +1,9 @@
 module Common where
 
+#if !MIN_VERSION_base(4,8,0)
+import Prelude hiding (mapM, mapM_)
+import Data.Traversable (Traversable(..))
+#endif
 import Data.Hashable
 import Database.Redis
 import qualified Data.ByteString.Char8 as BS
