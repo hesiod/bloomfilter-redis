@@ -5,10 +5,9 @@ import Test.Tasty.QuickCheck as QC
 import Test.Tasty.HUnit as HU hiding (assert)
 import Test.QuickCheck.Monadic
 
-import Data.List
-import Data.Monoid as Mn
-import Data.Foldable
-import Data.Word
+import Data.List (nub)
+import Data.Monoid (All(..))
+import Data.Word (Word32, Word64)
 import Database.Redis
 
 import Data.RedisBloom

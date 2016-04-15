@@ -6,8 +6,8 @@
 -- | Internals
 module Data.RedisBloom.Internal where
 
-import GHC.Generics
-import Data.Typeable
+import GHC.Generics (Generic)
+import Data.Typeable (Typeable)
 
 import qualified Data.ByteString.Char8 as BS
 

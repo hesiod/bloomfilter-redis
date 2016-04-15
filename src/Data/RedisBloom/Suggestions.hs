@@ -7,16 +7,14 @@ module Data.RedisBloom.Suggestions
      -- * Suggestions
      suggestCapacity, suggestHashCount,
      -- * Bloom filter creation
-     suggestCreate,
-     module Data.RedisBloom.Internal
+     suggestCreate
     )
 where
 
-import Data.Hashable
+import Data.Hashable (Hashable)
 
 import Data.RedisBloom
 import Data.RedisBloom.Hash
-import Data.RedisBloom.Internal
 
 -- | http://hur.st/bloomfilter
 -- Suggests an appropriate capacity for a given number of elements.

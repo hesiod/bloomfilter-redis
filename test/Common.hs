@@ -6,7 +6,6 @@ import qualified Data.ByteString.Char8 as BS
 
 import Data.RedisBloom
 import Data.RedisBloom.Hash
-import Data.RedisBloom.Suggestions
 
 test_key :: Key
 test_key = BS.pack "tk"

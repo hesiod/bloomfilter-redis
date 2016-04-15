@@ -19,9 +19,9 @@ where
 #if !MIN_VERSION_base(4,8,0)
 import Control.Applicative ((<$>))
 #endif
-import Data.Bits
-import Data.Word
-import Data.Hashable
+import Data.Bits (shiftR, finiteBitSize, (.&.))
+import Data.Word (Word32, Word64)
+import Data.Hashable (Hashable)
 
 import Data.RedisBloom.Internal
 

@@ -4,16 +4,18 @@
 -- | A bloom filter for the Redis in-memory store.
 module Data.RedisBloom
     (
-     -- * Bloom filters
+     -- * Bloom filter configuration
+     -- ** Fundamental types
+     module Data.RedisBloom.Internal,
+     -- ** Static bloom filter configuration
      Bloom(..),
      -- * Bloom filter operations
      createBF, createIfNewBF, addBF, queryBF
     ) where
 
-import Data.Foldable
-import Data.Monoid
+import Data.Monoid (All(..))
 
-import qualified Data.ByteString.Char8 as BS
+import Data.ByteString.Char8 (pack)
 import Database.Redis
 
 import Data.RedisBloom.Hash
@@ -36,19 +38,19 @@ data Bloom a = Bloom {
 createBF :: (RedisCtx m (Either Reply)) => Bloom a -> m (Either Reply Status)
 createBF bf = set (key bf) empty
     where
-      empty = BS.pack ""
+      empty = pack ""
 -- | Create a new bloom filter with the specified configuration if the specified key does not yet exist.
 createIfNewBF :: (RedisCtx m (Either Reply)) => Bloom a -> m (Either Reply Bool)
 createIfNewBF bf = setnx (key bf) empty
     where
-      empty = BS.pack ""
+      empty = pack ""
 
 -- | Add an element to an existing bloom filter.
 addBF :: (RedisCtx m f) => Bloom a -> a -> m ()
 addBF bf = mapM_ (flip (setbit (key bf)) one) . fmap (toInteger . (`mod` cap) . fromIntegral) . hf bf
     where
       (Capacity cap) = capacity bf
-      one = BS.pack "1"
+      one = pack "1"
 
 getBit :: (MonadRedis m, RedisCtx m (Either Reply)) => Bloom a -> Integer -> m Bool
 getBit bf i = do

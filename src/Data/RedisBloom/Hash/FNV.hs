@@ -20,10 +20,11 @@ module Data.RedisBloom.Hash.FNV
     )
 where
 
-import Data.Binary
-import Data.Bits
+import Data.Binary (Binary, encode)
+import Data.Word (Word8, Word32, Word64)
+import Data.Bits (Bits(..), FiniteBits(..), shiftL, popCount)
 
-import Math.NumberTheory.Primes.Testing
+import Math.NumberTheory.Primes.Testing (isPrime)
 
 import qualified Data.ByteString as B
 import qualified Data.ByteString.Lazy as BL
