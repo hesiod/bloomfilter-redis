@@ -3,8 +3,8 @@ import Criterion.Main
 import Criterion.Types
 import System.Random
 
+import Data.RedisBloom
 import Data.RedisBloom.Hash
-import Data.RedisBloom.Suggestions
 
 setup :: a -> IO (a, Int, [Int], [Int])
 setup z = do
