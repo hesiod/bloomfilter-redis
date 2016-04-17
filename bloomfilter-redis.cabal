@@ -1,5 +1,5 @@
 name:                bloomfilter-redis
-version:             0.1.0.1
+version:             0.1.0.2
 synopsis:            Distributed bloom filters on Redis (using the Hedis client).
 description:
   Distributed bloom filters on Redis (using the Hedis client).
