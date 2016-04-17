@@ -1,4 +1,8 @@
+{-# LANGUAGE CPP #-}
+
+#if !MIN_VERSION_base(4,8,0)
 import Data.Foldable (foldMap)
+#endif
 import Data.List (nub)
 import Data.Monoid (All(..))
 import Data.Word (Word32, Word64)
