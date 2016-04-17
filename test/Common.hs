@@ -5,7 +5,7 @@ module Common where
 
 #if !MIN_VERSION_base(4,8,0)
 import Prelude hiding (mapM, mapM_)
-import Data.Foldable (Foldable(..))
+import Data.Foldable (Foldable(..), mapM_)
 import Data.Traversable (Traversable(..))
 #endif
 import Data.Hashable
