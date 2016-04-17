@@ -1,3 +1,8 @@
+import Data.Foldable (foldMap)
+import Data.List (nub)
+import Data.Monoid (All(..))
+import Data.Word (Word32, Word64)
+
 import Test.Tasty
 import Test.Tasty.Runners
 import Test.Tasty.Ingredients.Rerun
@@ -5,11 +10,7 @@ import Test.Tasty.QuickCheck as QC
 import Test.Tasty.HUnit as HU hiding (assert)
 import Test.QuickCheck.Monadic
 
-import Data.List (nub)
-import Data.Monoid (All(..))
-import Data.Word (Word32, Word64)
 import Database.Redis
-
 import Data.RedisBloom
 import Data.RedisBloom.Hash.FNV
 import Data.RedisBloom.Suggestions
