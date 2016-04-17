@@ -1,3 +1,8 @@
+0.1.0.2
+------
+* Fix bad Hackage upload of 0.1.0.2 (it accidentally contained a
+  breaking API change to be released in a later version)
+
 0.1.0.1
 ------
 * README improvements
