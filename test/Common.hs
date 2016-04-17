@@ -5,6 +5,7 @@ module Common where
 
 #if !MIN_VERSION_base(4,8,0)
 import Prelude hiding (mapM, mapM_)
+import Data.Foldable (Foldable(..))
 import Data.Traversable (Traversable(..))
 #endif
 import Data.Hashable
@@ -27,7 +28,7 @@ test_bf = Bloom test_key sz hb
 
 createAddQuery :: Hashable a => Bloom a -> a -> Redis Bool
 createAddQuery b x = createBF b >> addBF b x >> queryBF b x
-createAddL :: (Hashable a, Traversable t) => Bloom a -> t a -> Redis ()
+createAddL :: (Hashable a, Foldable t) => Bloom a -> t a -> Redis ()
 createAddL b l = createBF b >> mapM_ (addBF b) l
 queryL :: (Hashable a, Traversable t) => Bloom a -> t a -> Redis (t Bool)
 queryL b = mapM (queryBF b)
