@@ -1,3 +1,7 @@
+0.1.0.3
+------
+* Compatibility with GHC 8.0/base-4.9
+
 0.1.0.2
 ------
 * Fix bad Hackage upload of 0.1.0.2 (it accidentally contained a
