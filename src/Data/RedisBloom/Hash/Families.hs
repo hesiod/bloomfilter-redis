@@ -47,7 +47,7 @@ type RawHashFunction a = (a -> RawHash)
 -- Just like the original bloom filter package, a variant of
 -- Kirsch and Mitzenmacher's technique from \"Less
 -- Hashing, Same Performance: Building a Better Bloom Filter\",
--- <http://www.eecs.harvard.edu/~kirsch/pubs/bbbf/esa06.pdf> is used here.
+-- <https://www.eecs.harvard.edu/~michaelm/postscripts/tr-02-05.pdf> is used here.
 --
 -- Quoting from the non-Redis bloomfilter package:
 -- "Where Kirsch and Mitzenmacher multiply the second hash by a
