@@ -14,7 +14,7 @@ maintainer:          Tobias Markus <tobias AT miglix DOT eu>
 copyright:           Copyright 2016 Tobias Markus <tobias AT miglix DOT eu>
 category:            Data
 build-type:          Simple
-cabal-version:       >=1.14
+cabal-version:       1.14
 stability:           Experimental
 
 source-repository head
@@ -39,12 +39,12 @@ library
                    , BangPatterns
                    , Safe
                    , CPP
-  build-depends:     base       >= 4.7 && < 4.10
+  build-depends:     base       >= 4.7 && < 4.13
                    , bytestring >= 0.9 && < 0.11
                    , binary     >= 0.7 && < 0.9
-                   , hashable   >= 1.2 && < 1.3
-                   , hedis      >= 0.5 && < 0.10
-                   , arithmoi   >= 0.3 && < 0.5
+                   , hashable   >= 1.2 && < 1.4
+                   , hedis      >= 0.5 && < 0.13
+                   , arithmoi   >= 0.3 && < 0.10
   hs-source-dirs:    src
 
 test-suite test-bloomfilter-redis
@@ -56,13 +56,13 @@ test-suite test-bloomfilter-redis
   build-depends:     base
                    , bloomfilter-redis
                    , bytestring       >= 0.9 && < 0.11
-                   , hashable         >= 1.2 && < 1.3
-                   , hedis            >= 0.5 && < 0.10
-                   , tasty            >= 0.8 && < 0.12
+                   , hashable         >= 1.2 && < 1.4
+                   , hedis            >= 0.5 && < 0.13
+                   , tasty            >= 0.8 && < 1.3
                    , tasty-rerun      >= 1.1 && < 1.2
-                   , tasty-quickcheck >= 0.8 && < 0.9
-                   , QuickCheck       >= 2.8 && < 2.9
-                   , tasty-hunit      >= 0.9 && < 0.10
+                   , tasty-quickcheck >= 0.8 && < 0.11
+                   , QuickCheck       >= 2.8 && < 2.13
+                   , tasty-hunit      >= 0.9 && < 0.11
 
 benchmark bench-bloomfilter-redis
   ghc-options:       -O2
@@ -73,4 +73,4 @@ benchmark bench-bloomfilter-redis
   build-depends:     base
                    , bloomfilter-redis
                    , random    >= 1.1 && < 1.2
-                   , criterion >= 1.1 && < 1.2
+                   , criterion >= 1.1 && < 1.6
