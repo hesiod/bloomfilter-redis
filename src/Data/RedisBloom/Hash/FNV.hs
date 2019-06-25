@@ -91,7 +91,7 @@ fnvFold True  !x !h = fnvPrime * (h  `xor` fromIntegral x)
 --
 -- <http://www.isthe.com/chongo/tech/comp/fnv/#FNV-0>
 fnv0 :: (Binary a, Num b, FiniteBits b) => a -> b
-fnv0 = B.foldr' (fnvFold False) 0 . BL.toStrict . encode
+fnv0 = BL.foldr (fnvFold False) 0 . encode
 
 fnvOffsetBasis32 :: Word32
 fnvOffsetBasis32 = $( [| fnvOffsetBasis |] )
@@ -118,9 +118,9 @@ fnv1, fnv1a  :: (Binary a, FiniteBits b, Num b) => a -> b
 -- The hash is first multiplied with the 'fnvPrime' and then 'xor'ed with the octet.
 --
 -- <http://www.isthe.com/chongo/tech/comp/fnv/#FNV-1>
-fnv1  = B.foldr' (fnvFold False) fnvOffsetBasis . BL.toStrict . encode
+fnv1  = BL.foldr (fnvFold False) fnvOffsetBasis . encode
 -- | Variant 1a of the FNV hash function.
 -- The hash is first 'xor'ed with the octet and then multiplied with the 'fnvPrime'.
 --
 -- <http://www.isthe.com/chongo/tech/comp/fnv/#FNV-1a>
-fnv1a = B.foldr' (fnvFold True)  fnvOffsetBasis . BL.toStrict . encode
+fnv1a = BL.foldr (fnvFold True)  fnvOffsetBasis . encode
