@@ -1,5 +1,5 @@
 packages:
-- '.'
+- .
 extra-deps:
-- arithmoi-0.4.2.0
-resolver: nightly-2016-06-04
+- tasty-rerun-1.1.14@sha256:ba9c19a281535bea566e1044bc02c36ef17abcb310af4b6a149ec11780c7ce35
+resolver: lts-13.26
