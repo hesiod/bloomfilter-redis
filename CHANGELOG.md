@@ -1,3 +1,7 @@
+0.1.0.4
+------
+* Compatibility with GHC 8.6/base-4.12
+
 0.1.0.3
 ------
 * Compatibility with GHC 8.0/base-4.9
