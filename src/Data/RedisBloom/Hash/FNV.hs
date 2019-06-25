@@ -26,7 +26,6 @@ import Data.Bits (Bits(..), FiniteBits(..), shiftL, popCount)
 
 import Math.NumberTheory.Primes.Testing (isPrime)
 
-import qualified Data.ByteString as B
 import qualified Data.ByteString.Lazy as BL
 
 {-# INLINE twoPwr #-}
@@ -61,13 +60,13 @@ findPrime s = if null primes then head candidates else head primes
       primes = filter isPrime candidates
 
 fnvPrime32 :: Word32
-fnvPrime32 = $( [| fromInteger $ findPrime (32::Word32) |] )
+fnvPrime32 = 16777619
 fnvPrime64 :: Word64
-fnvPrime64 = $( [| fromInteger $ findPrime (64::Word64) |] )
-{-# INLINE [1] fnvPrime #-}
+fnvPrime64 = 1099511628211
+{-# INLINE [2] fnvPrime #-}
 {-# RULES
-  "prime/32" [2] fnvPrime = fnvPrime32;
-  "prime/64" [2] fnvPrime = fnvPrime64;
+  "prime/32" [3] fnvPrime = fnvPrime32;
+  "prime/64" [3] fnvPrime = fnvPrime64;
   #-}
 -- | The FNV prime. The prime is calculated
 -- automatically based on the number of bits
@@ -80,11 +79,14 @@ fnvPrime64 = $( [| fromInteger $ findPrime (64::Word64) |] )
 fnvPrime :: forall a. (Num a, FiniteBits a) => a
 fnvPrime = fromInteger . findPrime . finiteBitSize $ (undefined :: a)
 
-{-# INLINE fnvFold #-}
+{-# INLINE [1] fnvFold #-}
+{-# SPECIALIZE fnvFold :: Bool -> Word8 -> Word32 -> Word32 #-}
+{-# SPECIALIZE fnvFold :: Bool -> Word8 -> Word64 -> Word64 #-}
 fnvFold :: (Num a, FiniteBits a) => Bool -> Word8 -> a -> a
 fnvFold False !x !h = (fnvPrime * h) `xor` fromIntegral x
 fnvFold True  !x !h = fnvPrime * (h  `xor` fromIntegral x)
 
+{-# INLINEABLE fnv0 #-}
 -- | Variant 0 is historical and should not be used directly.
 -- Rather, it is used to calculate the offset basis ('fnvOffsetBasis')
 -- of the algorithm ('fnv1' and 'fnv1a').
@@ -94,9 +96,9 @@ fnv0 :: (Binary a, Num b, FiniteBits b) => a -> b
 fnv0 = BL.foldr (fnvFold False) 0 . encode
 
 fnvOffsetBasis32 :: Word32
-fnvOffsetBasis32 = $( [| fnvOffsetBasis |] )
+fnvOffsetBasis32 = 2936991659
 fnvOffsetBasis64 :: Word64
-fnvOffsetBasis64 = $( [| fnvOffsetBasis |] )
+fnvOffsetBasis64 = 12134123147076137451
 {-# INLINE [1] fnvOffsetBasis #-}
 {-# RULES
   "offset/32" [2] fnvOffsetBasis = fnvOffsetBasis32;
@@ -108,11 +110,14 @@ fnvOffsetBasis64 = $( [| fnvOffsetBasis |] )
 fnvOffsetBasis :: (FiniteBits a, Num a) => a
 fnvOffsetBasis = fnv0 constant
     where
-      constant = "chongo <Landon Curt Noll> /\\../\\" :: B.ByteString
+      constant = "chongo <Landon Curt Noll> /\\../\\" :: BL.ByteString
 
--- These lead to infinite loops (why?)
---{-# INLINABLE fnv1  #-}
---{-# INLINABLE fnv1a #-}
+{-# INLINABLE fnv1  #-}
+{-# INLINABLE fnv1a #-}
+{-# SPECIALIZE fnv1  :: Binary a => a -> Word32 #-}
+{-# SPECIALIZE fnv1  :: Binary a => a -> Word64 #-}
+{-# SPECIALIZE fnv1a :: Binary a => a -> Word32 #-}
+{-# SPECIALIZE fnv1a :: Binary a => a -> Word64 #-}
 fnv1, fnv1a  :: (Binary a, FiniteBits b, Num b) => a -> b
 -- | Variant 1 of the FNV hash function.
 -- The hash is first multiplied with the 'fnvPrime' and then 'xor'ed with the octet.
